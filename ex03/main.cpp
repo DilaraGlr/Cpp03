@@ -1,37 +1,25 @@
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#include "DiamondTrap.hpp"
 #include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main()
 {
-    ClapTrap clap("clappy");
-    ScavTrap scav("scavvy");
-    FragTrap frag("fraggy");
+   ClapTrap clapTrap("Clap");
+	ScavTrap scavTrap("Scav");
+	FragTrap fragTrap("Frag");
+	DiamondTrap diamondTrap("Diamond");
 
-    std::cout << std::endl;
+	scavTrap.attack(clapTrap.getName()); // Attack
+	clapTrap.takeDamage(scavTrap.getAttackDamage()); // -20HP HP : total = -10:
+	scavTrap.guardGate(); // enter keeper
+	clapTrap.takeDamage(1); // Already dead
+	scavTrap.guardGate();// exit keeper
+	diamondTrap.whoAmI();
+	diamondTrap.highFivesGuys();
+	diamondTrap.guardGate();
+	diamondTrap.guardGate();
+	diamondTrap.beRepaired(10);
+	diamondTrap.attack(fragTrap.getName());
 
-    clap.attack("target 1");
-    scav.attack("target 2");
-    frag.attack("target 3");
-
-    std::cout << std::endl;
-
-    clap.takeDamage(5);
-    scav.takeDamage(50);
-    frag.takeDamage(30);
-
-    std::cout << std::endl;
-
-    clap.beRepaired(3);
-    scav.beRepaired(20);
-    frag.beRepaired(20);
-
-    std::cout << std::endl;
-
-    scav.guardGate();
-    frag.highFivesGuys();
-
-    std::cout << std::endl;
-
-    return 0;
+	return (0);
 }

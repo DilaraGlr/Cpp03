@@ -8,10 +8,7 @@
 class ScavTrap : public ClapTrap
 {
     private:
-        std::string _name;
-        unsigned int _hitPoints;
-        unsigned int _energyPoints;
-        unsigned int _attackDamage;
+        bool _gateKeeperMode;
 
     public:
         ScavTrap();
@@ -22,6 +19,8 @@ class ScavTrap : public ClapTrap
 
         void attack(const std::string &target);
         void guardGate();
+        bool getKeeperMode(void) const;
+
 };
 
 #endif

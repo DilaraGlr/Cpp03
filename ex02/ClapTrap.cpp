@@ -48,17 +48,19 @@ void ClapTrap::attack(std::string const &target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    if(_hitPoints > 0)
-    {
-        std::cout << "ClapTrap " << _name << " takes " << amount << " points of damage!" << std::endl;
-        _hitPoints -= amount;
-    }
-    else
+    if (_hitPoints <= 0)
     {
         std::cout << "ClapTrap " << _name << " is already dead!" << std::endl;
+        return;
     }
-}
 
+    std::cout << "ClapTrap " << _name << " takes " << amount << " points of damage!" << std::endl;
+
+    if (amount >= _hitPoints)
+        _hitPoints = 0; // Assurer que les HP ne deviennent pas négatifs
+    else
+        _hitPoints -= amount;
+}
 void ClapTrap::beRepaired(unsigned int amount)
 {
     if( _energyPoints > 0 && _hitPoints > 0)
@@ -73,3 +75,38 @@ void ClapTrap::beRepaired(unsigned int amount)
     }
 }
 
+bool ClapTrap::posAction(void)
+{
+	bool	r;
+
+	r = false;
+	if (this->_hitPoints <= 0 && this->_energyPoints <= 0)
+		std::cout << "No more healh and energy point" << std::endl;
+	else if (this->_hitPoints <= 0)
+		std::cout << "No more healh" << std::endl;
+	else if (this->_energyPoints <= 0)
+		std::cout << "No more energy point" << std::endl;
+	else
+		r = true;
+	return (r);
+}
+
+std::string ClapTrap::getName(void) const
+{
+	return (this->_name);
+}
+
+int ClapTrap::getHealth(void) const
+{
+	return (this->_hitPoints);
+}
+
+int ClapTrap::getEnergyPoint(void) const
+{
+	return (this->_energyPoints);
+}
+
+int ClapTrap::getAttackDamage(void) const
+{
+	return (this->_attackDamage);
+}

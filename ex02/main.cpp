@@ -2,36 +2,21 @@
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 
-int main()
+int	main(void)
 {
-    ClapTrap clap("clappy");
-    ScavTrap scav("scavvy");
-    FragTrap frag("fraggy");
+	ClapTrap clapTrap("Clap");
+	ScavTrap scavTrap("Scav");
+	FragTrap fragTrap("Frag");
 
-    std::cout << std::endl;
+	scavTrap.attack(clapTrap.getName()); // Attack
+	clapTrap.takeDamage(scavTrap.getAttackDamage()); // -20HP HP : total = -10:
+	scavTrap.guardGate(); // enter keeper
+	clapTrap.takeDamage(1); // Already dead
+	scavTrap.guardGate();// exit keeper
 
-    clap.attack("target 1");
-    scav.attack("target 2");
-    frag.attack("target 3");
+	fragTrap.highFivesGuys();
+	fragTrap.highFivesGuys();
+	fragTrap.highFivesGuys();
 
-    std::cout << std::endl;
-
-    clap.takeDamage(5);
-    scav.takeDamage(50);
-    frag.takeDamage(30);
-
-    std::cout << std::endl;
-
-    clap.beRepaired(3);
-    scav.beRepaired(20);
-    frag.beRepaired(20);
-
-    std::cout << std::endl;
-
-    scav.guardGate();
-    frag.highFivesGuys();
-
-    std::cout << std::endl;
-
-    return 0;
+	return (0);
 }

@@ -1,6 +1,6 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap() : ClapTrap()
+FragTrap::FragTrap()
 {
     _hitPoints = 100;
     _energyPoints = 100;
@@ -8,17 +8,19 @@ FragTrap::FragTrap() : ClapTrap()
     std::cout << "FragTrap " << _name << " created!" << std::endl;
 }
 
-FragTrap::FragTrap(const std::string &name) : ClapTrap(name)
+FragTrap::FragTrap(const std::string &name)
 {
     _hitPoints = 100;
     _energyPoints = 100;
     _attackDamage = 30;
+    this->_name = name;
     std::cout << "FragTrap " << _name << " created!" << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other)
 {
     std::cout << "FragTrap " << _name << " created!" << std::endl;
+    *this = other;
 }
 
 FragTrap::~FragTrap()
@@ -28,26 +30,14 @@ FragTrap::~FragTrap()
 
 FragTrap &FragTrap::operator=(const FragTrap &other)
 {
-    if (this != &other)
-    {
-        ClapTrap::operator=(other);
-    }
-    std::cout << "FragTrap assignment operator called for " << _name << std::endl;
-    return *this;
-}
-
-void FragTrap::attack(const std::string &target)
-{
-    if (_energyPoints > 0 && _hitPoints > 0)
-    {
-        _energyPoints--;
-        std::cout << "FragTrap " << _name << " attacks " << target
-                  << ", causing " << _attackDamage << " points of damage!" << std::endl;
-    }
-    else
-    {
-        std::cout << "FragTrap " << _name << " is out of energy or hit points and can't attack!" << std::endl;
-    }
+    if (this == &other)
+		return (*this);
+	std::cout << "FragTrap assignation operator called with name " << other.getName() << std::endl;
+	this->_name = other.getName();
+	this->_hitPoints = other.getHealth();
+	this->_energyPoints = other.getEnergyPoint();
+	this->_attackDamage = other.getAttackDamage();
+	return (*this);	
 }
 
 void FragTrap::highFivesGuys()
